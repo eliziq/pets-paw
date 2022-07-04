@@ -1,0 +1,19 @@
+@import "../../common/colors.scss";
+
+.home {
+  position: relative;
+  .main-background {
+    background: $secondary-pink;
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    z-index: 0;
+    top: 5%;
+    right: 5%;
+  }
+  img {
+    z-index: 1;
+    width: 100%;
+    object-fit: cover;
+  }
+}

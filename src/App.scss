@@ -1,0 +1,45 @@
+@import "../src/common/colors.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Jost", sans-serif;
+}
+
+html,
+body {
+  font-size: 62.5%;
+  min-height: 100%;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  font-size: 1.6rem;
+  background: $primary-color;
+}
+
+a {
+  text-decoration: none;
+
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.main-section {
+  display: flex;
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+}
+button {
+  height: 36px;
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.2rem;
+  border: none;
+  width: 100%;
+}

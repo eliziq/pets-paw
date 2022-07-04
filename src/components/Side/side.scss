@@ -1,0 +1,104 @@
+@import "../../common/colors.scss";
+
+.welcome-section {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+
+  .welcome-container {
+    background-color: $primary-color;
+    width: 446px;
+    height: 544px;
+    left: 147px;
+    margin-top: 30px;
+    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .upper-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      h2 {
+        font-weight: 500;
+        font-size: 4.4rem;
+        margin-bottom: 10px;
+      }
+      p {
+        font-weight: 400;
+        font-size: 2rem;
+        color: $secondary-text-color;
+      }
+    }
+
+    .bottom-content {
+      display: flex;
+      flex-direction: column;
+      margin-top: auto;
+      margin-bottom: 0;
+
+      h3 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      .cards-wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        .card-container {
+          display: flex;
+          flex-direction: column;
+          margin-top: auto;
+          margin-bottom: 0;
+
+          .card {
+            height: 198px;
+            width: 138px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+          }
+          .card-vote {
+            background: #b4b7ff;
+            border: 4px solid rgba(255, 255, 255, 0.6);
+          }
+          .card-breeds {
+            background: #97eab9;
+            border: 4px solid rgba(255, 255, 255, 0.6);
+          }
+          .card-gallery {
+            background: #ffd280;
+            border: 4px solid rgba(255, 255, 255, 0.6);
+          }
+          button {
+            margin-top: 10px;
+            border-radius: 10px;
+            color: $primary-pink;
+            background-color: white;
+          }
+          &:hover {
+            button {
+              background: $secondary-pink;
+            }
+            .card {
+              border: 4px solid #ffffff;
+            }
+          }
+          &:active {
+            button {
+              background: $primary-pink;
+              color: white;
+            }
+            .card {
+              border: 4px solid #fbe0dc;
+            }
+          }
+        }
+      }
+    }
+  }
+}
