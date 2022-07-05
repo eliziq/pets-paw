@@ -1,0 +1,46 @@
+@import "../../common/colors.scss";
+
+.content-container {
+  background: white;
+  margin: 10px 0px;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+
+  .name-row {
+    display: flex;
+
+    .page-name {
+      margin-left: 10px;
+      width: 146px;
+      height: 40px;
+      border-radius: 10px;
+      background: $primary-pink;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 2rem;
+    }
+
+    .btn-back {
+      width: 40px;
+      height: 40px;
+      background: $secondary-pink;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+.main-img{
+    height: 85%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    margin: 20px 0px;
+}
+}
+
+

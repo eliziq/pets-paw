@@ -33,6 +33,16 @@ a {
   flex: 1;
   height: 100vh;
   overflow-y: auto;
+  position: relative;
+  .main-background {
+    // background: rgb(189, 187, 187);
+    width: 95%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+    top: 5%;
+    right: 5%;
+  }
 }
 button {
   height: 36px;
@@ -42,4 +52,5 @@ button {
   font-size: 1.2rem;
   border: none;
   width: 100%;
+  border-radius: 10px;
 }

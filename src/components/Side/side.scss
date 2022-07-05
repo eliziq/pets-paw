@@ -10,7 +10,7 @@
     width: 446px;
     height: 544px;
     left: 147px;
-    margin-top: 30px;
+    margin-top: 5vh;
     margin-bottom: auto;
     display: flex;
     flex-direction: column;
@@ -63,15 +63,15 @@
             border-radius: 20px;
           }
           .card-vote {
-            background: #b4b7ff;
+            background: $violet;
             border: 4px solid rgba(255, 255, 255, 0.6);
           }
           .card-breeds {
-            background: #97eab9;
+            background: $green;
             border: 4px solid rgba(255, 255, 255, 0.6);
           }
           .card-gallery {
-            background: #ffd280;
+            background: $yellow;
             border: 4px solid rgba(255, 255, 255, 0.6);
           }
           button {

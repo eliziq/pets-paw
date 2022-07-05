@@ -13,7 +13,9 @@ const Side = () => {
     <div className="welcome-section">
       <div className="welcome-container">
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <Link to={`/`}>
+            <img src={logo} alt="logo" />
+          </Link>
         </div>
         <div className="upper-text">
           <h2>Hi intern!</h2>
