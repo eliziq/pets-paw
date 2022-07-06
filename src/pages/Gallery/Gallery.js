@@ -1,6 +1,9 @@
 import React from "react";
 import SearchRow from "../../components/SearchRow/SearchRow";
 import ContentContainer from "../../components/ContentContainer/ContentContainer";
+import GalleryFilter from "../../components/GalleryFilter/GalleryFilter";
+import GridPattern from "../../components/GridPattern/GridPattern";
+
 
 const Gallery = () => {
   return (
@@ -8,7 +11,8 @@ const Gallery = () => {
       <div className="main-background">
         <SearchRow />
         <ContentContainer title="GALLERY">
-          <h2>hgjhsgdfkl</h2>
+        <GalleryFilter />
+        <GridPattern />
         </ContentContainer>
       </div>
     </div>

@@ -1,0 +1,43 @@
+@import "../../common/colors.scss";
+
+.breeds-filter {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  margin-left: 10px;
+
+  .breeds {
+    flex: 1;
+  }
+  select {
+    background-color: $primary-color;
+
+    option {
+      width: 300px;
+      max-height: 300px;
+      border: none;
+    }
+  }
+  .filter-right {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .limit {
+      width: 100%;
+      margin-left: 10px;
+      min-width: 100px;
+    }
+    .sort {
+      min-width: 40px;
+      height: 40px;
+      background: $primary-color;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+    }
+  }
+}

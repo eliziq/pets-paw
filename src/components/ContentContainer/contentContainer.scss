@@ -10,37 +10,56 @@
 
   .name-row {
     display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+    justify-content: space-between;
 
-    .page-name {
-      margin-left: 10px;
-      width: 146px;
-      height: 40px;
-      border-radius: 10px;
-      background: $primary-pink;
-      color: white;
+    .back-container {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 500;
-      font-size: 2rem;
+      
+      .page-name {
+        margin-left: 10px;
+        padding: 0px 30px;
+        height: 40px;
+        border-radius: 10px;
+        background: $primary-pink;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+        font-size: 2rem;
+      }
+
+      .btn-back {
+        width: 40px;
+        height: 40px;
+        background: $secondary-pink;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
-    .btn-back {
-      width: 40px;
+    .upload-btn {
       height: 40px;
+      width: 143px;
       background: $secondary-pink;
+      color: $primary-pink;
       display: flex;
       align-items: center;
       justify-content: center;
+
+      img {
+        margin-right: 10px;
+        height: 16px;
+      }
     }
   }
-.main-img{
-    height: 85%;
+  .main-img {
+    height: 90%;
     width: 100%;
     object-fit: cover;
     border-radius: 20px;
-    margin: 20px 0px;
+  }
 }
-}
-
-
