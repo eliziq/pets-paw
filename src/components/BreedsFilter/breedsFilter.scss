@@ -6,11 +6,10 @@
   flex: 1;
   margin-left: 10px;
 
-  .breeds {
+  .select-container{
     flex: 1;
   }
-  select {
-    background-color: $primary-color;
+  .select {
 
     option {
       width: 300px;
@@ -24,7 +23,7 @@
     flex-direction: row;
     justify-content: space-between;
 
-    .limit {
+    .select-container {
       width: 100%;
       margin-left: 10px;
       min-width: 100px;

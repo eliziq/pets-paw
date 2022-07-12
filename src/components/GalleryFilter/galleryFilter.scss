@@ -20,13 +20,24 @@
     justify-content: space-between;
     padding-top: 10px;
 
-    .custom-selector {
-      font-weight: 500;
-      font-size: 1rem;
+    .custom-selector-wrapper {
+
       color: $secondary-text-color;
       width: 100%;
-      span{
+
+      .select-container {
+        font-size: 1.6rem;
+        background-color: white;
+        border-radius: 20px;
+
+        .select__control {
+          background-color: white;
+        }
+      }
+      span {
+        font-weight: 500;
         padding-left: 10px;
+        font-size: 1rem;
       }
     }
 

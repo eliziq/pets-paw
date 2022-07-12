@@ -1,0 +1,24 @@
+@import "../../common/colors.scss";
+
+.prev-next-btns {
+  display: flex;
+  justify-content: center;
+
+  .prev-btn,
+  .next-btn {
+    width: 122px;
+    background: $primary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 20px 0px 20px;
+    height: 40px;
+    img {
+      margin: 7.5px;
+    }
+    span {
+      margin: 7.5px;
+      color: $secondary-text-color;
+    }
+  }
+}

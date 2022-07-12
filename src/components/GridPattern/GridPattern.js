@@ -1,27 +1,39 @@
 import "./gridPattern.scss";
+import React, { useEffect } from "react";
+import { getAllBreeds } from "../../features/cats/catSlice";
+import { useSelector } from "react-redux";
+import { fetchAsyncBreeds } from "../../features/cats/catSlice";
+import { useDispatch } from "react-redux";
+import like from "../../images/svgs/heart-outline.svg";
+import loading from "../../images/svgs/loading.svg";
 
-import React from "react";
+const GridPattern = ({ title }) => {
 
-const GridPattern = () => {
-  return (
-    <div className="grid">
-      <div className="grid-el box1">1</div>
-      <div className="grid-el ">2</div>
-      <div className="grid-el">3</div>
-      <div className="grid-el">4</div>
-      <div className="grid-el box2">5</div>
-      <div className="grid-el">6</div>
-      <div className="grid-el">7</div>
-      <div className="grid-el box3">8</div>
-      <div className="grid-el box4">9</div>
-      <div className="grid-el">10</div>
-      {/* <div className="grid-el box5">11</div>
-      <div className="grid-el">12</div>
-      <div className="grid-el">13</div>
-      <div className="grid-el">14</div>
-      <div className="grid-el box6">15</div> */}
-    </div>
+  const breeds = useSelector(getAllBreeds);
+  let renderBreeds = "";
+
+  renderBreeds = breeds.length ? (
+    breeds.map((breed, index) => {
+      return (
+        <div className="grid-el" key={breed.id} data={breed}>
+          <img src={breed.image.url} alt={breed.name} />
+          <div className="pink-filter"></div>
+          {title === "BREEDS" && (
+            <span className="breed-name">{breed.name}</span>
+          )}
+          {title === "GALLERY" && (
+            <span className="breed-like">
+              <img src={like} alt="" />
+            </span>
+          )}
+        </div>
+      );
+    })
+  ) : (
+    <div className="loading">ERROR<img src={loading} alt="" /></div>
   );
+
+  return <div className="grid grid-20">{renderBreeds}</div>;
 };
 
 export default GridPattern;

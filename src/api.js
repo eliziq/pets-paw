@@ -1,4 +1,4 @@
-import 'dotenv/config'
+// import 'dotenv/config'
 //Base URL
 const base_url = "https://api.thecatapi.com/v1/";
 

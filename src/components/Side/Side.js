@@ -6,9 +6,11 @@ import search from "../../images/images-search.png";
 import breeds from "../../images/pet-breeds.png";
 import vote from "../../images/vote-table.png";
 import logo from "../../images/svgs/logo.svg";
+import { useLocation } from "react-router";
 import "./side.scss";
 
 const Side = () => {
+  const pathname = useLocation().pathname;
   return (
     <div className="welcome-section">
       <div className="welcome-container">
@@ -24,30 +26,44 @@ const Side = () => {
         <div className="bottom-content">
           <h3>Lets start using The Cat API</h3>
           <div className="cards-wrapper">
-            <div className="card-container">
-              <div className="card card-vote">
-                <img src={vote} alt="vote" />
+            <Link to={`/voting`}>
+              <div className="card-container">
+                <div className={`card card-vote ${
+                    pathname === "/voting" ? "card-active" : ""
+                  }`}>
+                  <img src={vote} alt="vote" />
+                </div>
+                <button className={pathname === "/voting" ? "button-active" : ""}>VOTING</button>
               </div>
-              <Link to={`/voting`}>
-                <button>VOTING</button>
-              </Link>
-            </div>
-            <div className="card-container">
-              <div className="card card-breeds">
-                <img src={breeds} alt="breeds" />
+            </Link>
+            <Link to={`/breeds`}>
+              <div className="card-container">
+                <div
+                  className={`card card-breeds ${
+                    pathname === "/breeds" ? "card-active" : ""
+                  }`}
+                >
+                  <img src={breeds} alt="breeds" />
+                </div>
+                <button className={pathname === "/breeds" ? "button-active" : ""}>BREEDS</button>
               </div>
-              <Link to={`/breeds`}>
-                <button>BREEDS</button>
-              </Link>
-            </div>
-            <div className="card-container">
-              <div className="card card-gallery">
-                <img src={search} alt="gallery" />
+            </Link>
+            <Link to={`/gallery`}>
+              <div className="card-container">
+                <div
+                  className={`card card-gallery ${
+                    pathname === "/gallery" ? "card-active" : ""
+                  }`}
+                >
+                  <img src={search} alt="gallery" />
+                </div>
+                <button
+                  className={pathname === "/gallery" ? "button-active" : ""}
+                >
+                  GALLERY
+                </button>
               </div>
-              <Link to={`/gallery`}>
-                <button>GALLERY</button>
-              </Link>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

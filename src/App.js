@@ -7,7 +7,8 @@ import Voting from "./pages/Voting/Voting";
 import Breeds from "./pages/Breeds/Breeds";
 import Gallery from "./pages/Gallery/Gallery";
 
-function App() {
+const App = () => {
+  console.log("render App");
   return (
     <div className="main-wrapper">
       <Router>
@@ -21,6 +22,6 @@ function App() {
       </Router>
     </div>
   );
-}
+};
 
 export default App;

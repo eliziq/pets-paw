@@ -88,6 +88,15 @@
               border: 4px solid #ffffff;
             }
           }
+
+            .button-active {
+              background: $primary-pink;
+              color: white;
+            }
+            .card-active {
+              border: 4px solid #fbe0dc;
+
+          }
           &:active {
             button {
               background: $primary-pink;
@@ -97,8 +106,11 @@
               border: 4px solid #fbe0dc;
             }
           }
+          
+          
         }
       }
     }
   }
 }
+
