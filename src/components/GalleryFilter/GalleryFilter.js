@@ -1,11 +1,11 @@
 import "./galleryFilter.scss";
-
-import React from "react";
+import React, { useEffect } from "react";
 import update from "../../images/svgs/round-arrow.svg";
 import CustomSelector from "../CustomSelector/CustomSelector";
 import { useSelector } from "react-redux";
 import {
-  fetchAsyncBreeds,
+  fetchAsyncImages,
+  fetchAsyncBreedList,
   getAllBreeds,
   setLimit,
   setBreed,
@@ -16,22 +16,32 @@ import {
   getBreed,
   getOrder,
   getPage,
+  getBreedList,
 } from "../../features/cats/catSlice";
 import { useDispatch } from "react-redux";
 
 const GalleryFilter = () => {
+  const dispatch = useDispatch();
+  const limit = useSelector(getLimit);
+
+
+  // useEffect(() => {
+  //   dispatch(fetchAsyncBreedList());
+  // }, [dispatch]);
+
   const orderOptions = [
     { value: "rand", label: "Random" },
     { value: "desc", label: "Descending" },
     { value: "asc", label: "Ascending" },
   ];
 
-  const breedOptions = useSelector(getAllBreeds).map((breed) => ({
-    value: breed.name.toLowerCase(),
+  const breedOptions = useSelector(getBreedList).map((breed) => ({
+    value: breed.id,
     label: breed.name,
   }));
+  console.log(breedOptions);
 
-  breedOptions.unshift({ value: "none", label: "None" });
+  breedOptions.unshift({ value: "", label: "None" });
 
   const limitOptions = [
     { value: "5", label: "5 items per page" },
@@ -41,15 +51,14 @@ const GalleryFilter = () => {
   ];
 
   const typeOptions = [
-    { value: "all", label: "All" },
-    { value: "static", label: "Static" },
-    { value: "animated", label: "Animated" },
+    { value: "gif,jpg,png", label: "All" },
+    { value: "jpg,png", label: "Static" },
+    { value: "gif", label: "Animated" },
   ];
-
-  const dispatch = useDispatch();
 
   const limitHandler = (e) => {
     dispatch(setLimit(e.value));
+    dispatch(fetchAsyncImages());
   };
   const breedsHandler = (e) => {
     dispatch(setBreed(e.value));
@@ -60,8 +69,8 @@ const GalleryFilter = () => {
   const typeHandler = (e) => {
     dispatch(setType(e.value));
   };
-  const updateHandler = (e) => {
-    dispatch(fetchAsyncBreeds());
+  const updateHandler = () => {
+    dispatch(fetchAsyncImages());
   };
 
   return (

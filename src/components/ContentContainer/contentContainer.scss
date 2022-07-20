@@ -7,6 +7,8 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
+  min-height: calc(100%);
+  margin-bottom: 30px;
 
   .name-row {
     display: flex;

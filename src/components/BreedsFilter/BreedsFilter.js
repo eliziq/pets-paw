@@ -15,11 +15,19 @@ import {
   getBreed,
   getOrder,
   getPage,
+  fetchAsyncBreedList,
+  getBreedList,
 } from "../../features/cats/catSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 const BreedsFilter = () => {
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchAsyncBreedList());
+  // }, [dispatch]);
+
   const limitOptions = [
     { value: "5", label: "Limit: 5" },
     { value: "10", label: "Limit: 10" },
@@ -27,37 +35,33 @@ const BreedsFilter = () => {
     { value: "20", label: "Limit: 20" },
   ];
 
-  const breedOptions = useSelector(getAllBreeds).map((breed) => ({
-    value: breed.name.toLowerCase(),
+  const breedOptions = useSelector(getBreedList).map((breed) => ({
+    value: breed.id,
     label: breed.name,
   }));
 
-  breedOptions.unshift({ value: "none", label: "All" });
+  breedOptions.unshift({ value: "", label: "All" });
 
-  const order = useSelector(getOrder)
-
-  const dispatch = useDispatch();
+  const order = useSelector(getOrder);
 
   const limitHandler = (e) => {
     dispatch(setLimit(e.value));
+    dispatch(fetchAsyncBreeds());
   };
 
   const breedsHandler = (e) => {
     dispatch(setBreed(e.value));
+    dispatch(fetchAsyncBreeds());
   };
 
   const descOrderHandler = () => {
-    order !== 'desc' ?
-    dispatch(setOrder('desc')) :
-    dispatch(setOrder('rand'))
-    console.log( order !== 'desc');
+    order !== "desc" ? dispatch(setOrder("desc")) : dispatch(setOrder("rand"));
+    dispatch(fetchAsyncBreeds());
   };
 
   const ascOrderHandler = () => {
-    order !== 'asc' ?
-    dispatch(setOrder('asc')) :
-    dispatch(setOrder('rand'))
-    console.log('asc');
+    order !== "asc" ? dispatch(setOrder("asc")) : dispatch(setOrder("rand"));
+    dispatch(fetchAsyncBreeds());
   };
 
   return (
@@ -73,7 +77,10 @@ const BreedsFilter = () => {
           options={limitOptions}
           className="limit"
         />
-        <div className="sort" onClick={descOrderHandler}>
+        <div
+          className={`sort ${order === 'desc' ? "sort-active" : ""}`}
+          onClick={descOrderHandler}
+        >
           <img src={sortUp} alt="" />
         </div>
         <div className="sort" onClick={ascOrderHandler}>

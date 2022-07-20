@@ -40,9 +40,8 @@
     border-radius: 10px;
     border: none;
     outline: none;
-    :hover {
-      //   border-color: black;
-      //   box-shadow: black;
+    &:hover {
+      box-shadow: 0 0 0 2px $secondary-pink; 
     }
 
     .select__value-container {

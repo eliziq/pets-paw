@@ -35,12 +35,14 @@ a {
   position: relative;
   .main-background {
     // background: rgb(189, 187, 187);
-    width: 95%;
-    height: 100%;
+    width: calc(100% - 30px);
     position: absolute;
     z-index: 0;
-    top: 5%;
-    right: 5%;
+    top: 30px;
+    /* bottom: 5%; */
+    right: 30px;
+    height: 85%;
+    // height: calc(100% - 60px);
   }
 }
 button {

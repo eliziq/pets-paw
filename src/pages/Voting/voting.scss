@@ -5,12 +5,16 @@
     position: relative;
     flex-direction: column;
     align-items: center;
-    height: 50vh;
+    height: 45vh;
+    margin-bottom: 42px;
+    .main-img {
+      height: 100%;
+    }
     .reactions {
       position: absolute;
       left: 50%;
-      bottom: 20%;
-      transform: translate(-50%, 100%);
+      bottom: 0%;
+      transform: translate(-50%,50%);
     }
   }
 }

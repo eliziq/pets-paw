@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import Voting from "./pages/Voting/Voting";
 import Breeds from "./pages/Breeds/Breeds";
 import Gallery from "./pages/Gallery/Gallery";
+import BreedPage from "./pages/BreedPage/BreedPage";
 
 const App = () => {
   console.log("render App");
@@ -16,7 +17,8 @@ const App = () => {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/voting" element={<Voting />} />
-          <Route path="/breeds" element={<Breeds />} />
+          <Route path="/breeds" exact element={<Breeds />} />
+          <Route path="/breeds/:id" element={<BreedPage />} />
           <Route path="/gallery" element={<Gallery />} />
         </Routes>
       </Router>

@@ -28,24 +28,37 @@ const Side = () => {
           <div className="cards-wrapper">
             <Link to={`/voting`}>
               <div className="card-container">
-                <div className={`card card-vote ${
+                <div
+                  className={`card card-vote ${
                     pathname === "/voting" ? "card-active" : ""
-                  }`}>
+                  }`}
+                >
                   <img src={vote} alt="vote" />
                 </div>
-                <button className={pathname === "/voting" ? "button-active" : ""}>VOTING</button>
+                <button
+                  className={pathname === "/voting" ? "button-active" : ""}
+                >
+                  VOTING
+                </button>
               </div>
             </Link>
             <Link to={`/breeds`}>
               <div className="card-container">
                 <div
                   className={`card card-breeds ${
-                    pathname === "/breeds" ? "card-active" : ""
+                    // || "/breeds/selected" doesnt work
+                    pathname === "/breeds" 
+                      ? "card-active"
+                      : ""
                   }`}
                 >
                   <img src={breeds} alt="breeds" />
                 </div>
-                <button className={pathname === "/breeds" ? "button-active" : ""}>BREEDS</button>
+                <button
+                  className={pathname === "/breeds" ? "button-active" : ""}
+                >
+                  BREEDS
+                </button>
               </div>
             </Link>
             <Link to={`/gallery`}>
