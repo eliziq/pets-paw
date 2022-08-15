@@ -14,10 +14,8 @@ import { useParams } from "react-router-dom";
 const BreedPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params.id);
 
   useEffect(() => {
-    console.log(params.id);
     dispatch(fetchSelectedBreed(params.id));
   }, [dispatch]);
 
@@ -28,12 +26,11 @@ const BreedPage = () => {
   const [slideIndex, setSlideIndex] = useState(1);
 
   const bredFor = (description) => {
-    if(description){
-    const indexOfDot = description.indexOf(".");
-    return description.slice(0, indexOfDot + 1);}
+    if (description) {
+      const indexOfDot = description.indexOf(".");
+      return description.slice(0, indexOfDot + 1);
+    }
   };
-
-  console.log(bredFor(description));
 
   const changeSlideHandler = (direction) => {
     if (direction === "next") {

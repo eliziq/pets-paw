@@ -7,9 +7,13 @@ import Voting from "./pages/Voting/Voting";
 import Breeds from "./pages/Breeds/Breeds";
 import Gallery from "./pages/Gallery/Gallery";
 import BreedPage from "./pages/BreedPage/BreedPage";
+import SearchPage from "./pages/SearchPage/SearchPage";
+import Likes from "./pages/Likes/Likes";
+import Favourites from "./pages/Favourites/Favourites";
+import Dislikes from "./pages/Dislikes/Dislikes";
 
 const App = () => {
-  console.log("render App");
+
   return (
     <div className="main-wrapper">
       <Router>
@@ -20,6 +24,10 @@ const App = () => {
           <Route path="/breeds" exact element={<Breeds />} />
           <Route path="/breeds/:id" element={<BreedPage />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/likes" element={<Likes />} />
+          <Route path="/favourites" element={<Favourites />} />
+          <Route path="/dislikes" element={<Dislikes />} />
         </Routes>
       </Router>
     </div>

@@ -11,5 +11,16 @@
     width: 60px;
     height: 60px;
     background-color: white;
+    &:hover{
+      background-color: $secondary-pink;
+      // background-image: url(../../images/svgs/smile-white.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 10px;
+      img{
+        // display: none;
+      }
+    }
   }
+
 }

@@ -8,11 +8,11 @@ import { useDispatch } from "react-redux";
 import { fetchAsyncImages } from "../../features/cats/catSlice";
 
 const Gallery = () => {
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAsyncImages());
   }, [dispatch]);
-
 
   return (
     <div className="gallery main-section">
@@ -20,7 +20,7 @@ const Gallery = () => {
         <SearchRow />
         <ContentContainer title="GALLERY">
           <GalleryFilter  />
-          <GridPattern title="GALLERY" />
+          <GridPattern/>
           <PrevNextBtns />
         </ContentContainer>
       </div>

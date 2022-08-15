@@ -16,7 +16,6 @@ const PrevNextBtnx = () => {
   const pathname = useLocation().pathname;
 
   const pageHandler = (direction) => {
-    console.log(direction);
     dispatch(setPage(direction))
     pathname === "/breeds"
       ? dispatch(fetchAsyncBreeds())

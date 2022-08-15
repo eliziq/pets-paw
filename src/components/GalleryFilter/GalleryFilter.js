@@ -39,7 +39,7 @@ const GalleryFilter = () => {
     value: breed.id,
     label: breed.name,
   }));
-  console.log(breedOptions);
+
 
   breedOptions.unshift({ value: "", label: "None" });
 

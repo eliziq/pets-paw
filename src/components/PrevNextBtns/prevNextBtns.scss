@@ -16,10 +16,32 @@
     height: 40px;
     img {
       margin: 7.5px;
+      opacity: 1;
     }
     span {
       margin: 7.5px;
       color: $secondary-text-color;
     }
+    &:hover {
+      background-color: $secondary-pink;
+      background-image: url(../../images/svgs/arrow-right-pink.svg);
+      background-repeat: no-repeat;
+      background-position-x: 70%;
+      background-position-y: center;
+      padding: 10px;
+      img {
+        opacity: 0;
+      }
+      span{
+        color: $primary-pink;
+      }
+    }
   }
+  .prev-btn{
+    &:hover{
+      background-image: url(../../images/svgs/arrow-left-pink.svg);
+      background-position-x: 30%;
+    }
+  }
+  
 }

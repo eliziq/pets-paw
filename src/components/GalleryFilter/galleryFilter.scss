@@ -21,7 +21,6 @@
     padding-top: 10px;
 
     .custom-selector-wrapper {
-
       color: $secondary-text-color;
       width: 100%;
 
@@ -47,7 +46,7 @@
       justify-content: space-between;
 
       .update-btn {
-        width: 40px;
+        min-width: 40px;
         height: 40px;
         background: white;
         border-radius: 10px;
@@ -56,6 +55,17 @@
         justify-content: center;
         align-self: end;
         margin-left: 10px;
+        
+        &:hover {
+          background-color: $primary-pink;
+          background-image: url(../../images/svgs/round-arrow-white.svg);
+          background-repeat: no-repeat;
+          background-position: center;
+          padding: 10px;
+          img {
+            display: none;
+          }
+        }
       }
     }
   }

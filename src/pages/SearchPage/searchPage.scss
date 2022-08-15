@@ -1,1 +1,12 @@
 @import "../../common/colors.scss";
+
+p {
+  font-size: 20px;
+  color: $secondary-text-color;
+  margin-bottom: 20px;
+
+  span {
+    font-weight: 500;
+    color: #000;
+  }
+}

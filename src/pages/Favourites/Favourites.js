@@ -1,30 +1,27 @@
-import React, { useEffect } from "react";
+import React from "react";
+// import "./favourites.scss";
 import SearchRow from "../../components/SearchRow/SearchRow";
 import ContentContainer from "../../components/ContentContainer/ContentContainer";
 import GridPattern from "../../components/GridPattern/GridPattern";
-import PrevNextBtnx from "../../components/PrevNextBtns/PrevNextBtnx";
+import { useEffect } from "react";
+import { fetchAsyncFavourites } from "../../features/cats/catSlice";
 import { useDispatch } from "react-redux";
-import { fetchAsyncBreeds, getLimit  } from "../../features/cats/catSlice";
-import { useSelector } from "react-redux";
 
-const Breeds = () => {
+const Favourites = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(fetchAsyncBreeds());
+    dispatch(fetchAsyncFavourites());
   });
-
   return (
-    <div className="breeds main-section">
+    <div className="main-section">
       <div className="main-background">
         <SearchRow />
-        <ContentContainer title="BREEDS">
-          <GridPattern/>
-          <PrevNextBtnx />
+        <ContentContainer title="FAVOURITES">
+          <GridPattern />
         </ContentContainer>
       </div>
     </div>
   );
 };
 
-export default Breeds;
+export default Favourites;

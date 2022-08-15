@@ -20,11 +20,11 @@ const Side = () => {
           </Link>
         </div>
         <div className="upper-text">
-          <h2>Hi intern!</h2>
-          <p>Welcome to MI 2022 Front-end test</p>
+          <h2>Hi stranger!</h2>
+          <p>Welcome to my Cat API project</p>
         </div>
         <div className="bottom-content">
-          <h3>Lets start using The Cat API</h3>
+          <h3>Lets start using it</h3>
           <div className="cards-wrapper">
             <Link to={`/voting`}>
               <div className="card-container">

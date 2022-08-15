@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import "../../api";
 import catsApi from "../../common/catsApi";
+import { useSelector } from "react-redux";
 
-//state.name-of-slice.name-of-property
 export const getAllBreeds = (state) => state.cats.breeds;
 export const getAllImages = (state) => state.cats.galleryImages;
 export const getBreed = (state) => state.cats.breedFilter;
@@ -13,6 +12,13 @@ export const getLimit = (state) => state.cats.limitFilter;
 export const getRandomCat = (state) => state.cats.randomCat;
 export const getBreedList = (state) => state.cats.breedList;
 export const getSelectedBreed = (state) => state.cats.selected;
+export const getSearchInput = (state) => state.cats.searchInput;
+export const getSearchResult = (state) => state.cats.searchResult;
+export const getSearchSubmited = (state) => state.cats.searchSubmited;
+export const getActionLog = (state) => state.cats.actionLog;
+export const getLikes = (state) => state.cats.likes;
+export const getDislikes = (state) => state.cats.dislikes;
+export const getFavourites = (state) => state.cats.favourites;
 
 const initialState = {
   breedList: [],
@@ -28,6 +34,10 @@ const initialState = {
   likes: [],
   favourites: [],
   dislikes: [],
+  searchInput: "",
+  searchSubmited: "",
+  searchResult: [],
+  actionLog: [],
 };
 
 export const fetchAsyncBreedList = createAsyncThunk(
@@ -75,9 +85,33 @@ export const fetchAsyncImages = createAsyncThunk(
     const page = getState().cats.page || "1";
 
     const response = await catsApi.get(
-      `images/search?apiKey=${process.env.REACT_APP_CAT_API}&limit=${limit}&order=${order}&page=${page > 0 ? page : "1"}&mime_types=${type}&breed_id=${breed}`
+      `images/search?apiKey=${
+        process.env.REACT_APP_CAT_API
+      }&limit=${limit}&order=${order}&page=${
+        page > 0 ? page : "1"
+      }&mime_types=${type}&breed_id=${breed}`
     );
     return response.data;
+  }
+);
+export const fetchAsyncSearch = createAsyncThunk(
+  "cats/fetchAsyncSearch",
+  async (_, { getState }) => {
+    const input = getState().cats.searchInput || "";
+
+    const searchedResponse = await catsApi.get(
+      `breeds/search?apiKey=${process.env.REACT_APP_CAT_API}&q=${input}`
+    );
+
+    const breedList = getState().cats.breedList || [];
+
+    const result = await searchedResponse.data.map((breed) => {
+      const imageUrl = breedList.find(
+        (item) => item.image?.id === breed.reference_image_id
+      ).image.url;
+      return { ...breed, imageUrl: imageUrl };
+    });
+    return result;
   }
 );
 
@@ -92,35 +126,104 @@ export const fetchAsyncRandom = createAsyncThunk(
 export const fetchSelectedBreed = createAsyncThunk(
   "cats/fetchSelectedBreed",
   async (id, { getState }) => {
-    const breedList = getState().cats.breedList || [];
-
-    const imageUrl = await breedList.filter((item) => item.id === id).shift()
-      ?.image.url;
-    console.log(imageUrl);
-
     const breedResponse = await catsApi.get(`breeds/${id}`);
-    const imageResponse = await catsApi.get(`images/search?&limit=5&breed_id=${id}`);
-
-    console.log( imageResponse.data);
-    return { ...breedResponse.data, images: imageResponse.data};
+    const imageResponse = await catsApi.get(
+      `images/search?&limit=5&breed_id=${id}`
+    );
+    return { ...breedResponse.data, images: imageResponse.data };
   }
 );
 
 export const voteForPicture = createAsyncThunk(
   "cats/voteForPicture",
   async (payload) => {
-    const response = await catsApi.post(`votes`, payload);
-    return response.data;
+    await catsApi.post(`votes`, payload, {
+      headers: { "x-api-key": process.env.REACT_APP_CAT_API },
+    });
+    return payload;
   }
 );
 
 export const addFavouritePicture = createAsyncThunk(
   "cats/addFavouritePicture",
   async (payload) => {
-    const response = await catsApi.post(`favourites`, payload, {
+    await catsApi.post(`favourites`, payload, {
+      headers: { "x-api-key": process.env.REACT_APP_CAT_API },
+    });
+    return payload;
+  }
+);
+
+export const fetchActionLogFavourite = createAsyncThunk(
+  "cats/fetchActionLogFavourite",
+  async (_, { getState }) => {
+    const response = await catsApi.get(`favourites`, {
+      headers: { "x-api-key": process.env.REACT_APP_CAT_API },
+    });
+
+    const lastLog = response.data.pop();
+    lastLog["value"] = 2;
+
+    const newActionLog = getState().cats.actionLog.slice();
+    newActionLog.unshift(lastLog);
+
+    newActionLog.splice(4, 1);
+    return newActionLog;
+  }
+);
+
+export const fetchAsyncFavourites = createAsyncThunk(
+  "cats/fetchAsyncFavourites",
+  async () => {
+    const response = await catsApi.get(`favourites`, {
       headers: { "x-api-key": process.env.REACT_APP_CAT_API },
     });
     return response.data;
+  }
+);
+
+export const fetchAsyncVotes = createAsyncThunk(
+  "cats/fetchAsyncVotes",
+  async () => {
+    const response = await catsApi.get(`votes`, {
+      headers: { "x-api-key": process.env.REACT_APP_CAT_API },
+    });
+    console.log(response.data)
+    return response.data;
+  }
+);
+
+export const deleteFavourite = createAsyncThunk(
+  "cats/deleteFavourite",
+  async (id) => {
+    const response = await catsApi.delete(`favourites/${id}`, {
+      headers: { "x-api-key": process.env.REACT_APP_CAT_API },
+    });
+    return response.data;
+  }
+);
+
+export const deleteVote = createAsyncThunk("cats/deleteVote", async (id) => {
+  const response = await catsApi.delete(`votes/${id}`, {
+    headers: { "x-api-key": process.env.REACT_APP_CAT_API },
+  });
+  return response.data;
+});
+
+export const fetchActionLogVotes = createAsyncThunk(
+  "cats/fetchActionLogVotes",
+  async (_, { getState }) => {
+    const response = await catsApi.get(`votes`, {
+      headers: { "x-api-key": process.env.REACT_APP_CAT_API },
+    });
+
+    const lastLog = response.data.pop();
+
+    const newActionLog = getState().cats.actionLog.slice();
+    newActionLog.unshift(lastLog);
+
+    newActionLog.splice(4, 1);
+    return newActionLog;
   }
 );
 
@@ -128,15 +231,6 @@ const catSlice = createSlice({
   name: "cats",
   initialState,
   reducers: {
-    addBreeds: (state, { payload }) => {
-      state.breeds = payload;
-    },
-    addBreedList: (state, { payload }) => {
-      state.breedList = payload;
-    },
-    addGalleryImages: (state, { payload }) => {
-      state.galleryImages = payload;
-    },
     setLimit: (state, { payload }) => {
       state.limitFilter = payload;
     },
@@ -150,57 +244,71 @@ const catSlice = createSlice({
       state.typeFilter = payload;
     },
     setPage: (state, { payload }) => {
-      console.log(payload);
       payload === "next" ? (state.page += 1) : (state.page -= 1);
-    },
-    setRandomCat: (state, { payload }) => {
-      state.randomCat = payload;
     },
     setSelectedBreed: (state, { payload }) => {
       state.selected = payload;
     },
+    setSearchInput: (state, { payload }) => {
+      state.searchInput = payload;
+    },
+    setSearchSubmited: (state, { payload }) => {
+      state.searchSubmited = payload;
+    },
   },
   extraReducers: {
-    [fetchAsyncBreeds.pending]: () => {
-      console.log("pending");
-    },
     [fetchAsyncBreeds.fulfilled]: (state, { payload }) => {
-      console.log("fetched sucsessfully");
       return { ...state, breeds: payload };
     },
     [fetchAsyncBreedList.fulfilled]: (state, { payload }) => {
-      console.log("fetched sucsessfully");
       return { ...state, breedList: payload };
     },
     [fetchAsyncImages.fulfilled]: (state, { payload }) => {
-      console.log("fetched sucsessfully");
       return { ...state, galleryImages: payload };
     },
     [fetchAsyncRandom.fulfilled]: (state, { payload }) => {
-      console.log("fetched sucsessfully");
       return { ...state, randomCat: payload };
     },
+    [fetchAsyncFavourites.fulfilled]: (state, { payload }) => {
+      return { ...state, favourites: payload };
+    },
+    [fetchAsyncVotes.fulfilled]: (state, { payload }) => {
+      // const likes = payload.filter((item) => item.value === 1);
+      let likes = [];
+      let dislikes = [];
+      payload.forEach((el) =>
+        el.value === 1 ? likes.push(el) : dislikes.push(el)
+      );
+      console.log(likes)
+      return { ...state, likes: likes, dislikes: dislikes };
+    },
+    // [deleteFavourite.fulfilled]: (state, { payload }) => {
+    //   return { ...state, favourites: payload };
+    // },
     [fetchSelectedBreed.fulfilled]: (state, { payload }) => {
-      console.log("fetched sucsessfully");
       return { ...state, selected: payload };
     },
-    [fetchAsyncBreeds.rejected]: () => {
-      console.log("rejected");
+    [fetchAsyncSearch.fulfilled]: (state, { payload }) => {
+      return { ...state, searchResult: payload };
+    },
+    [fetchActionLogFavourite.fulfilled]: (state, { payload }) => {
+      return { ...state, actionLog: payload };
+    },
+    [fetchActionLogVotes.fulfilled]: (state, { payload }) => {
+      return { ...state, actionLog: payload };
     },
   },
 });
 
 export const {
-  addBreedList,
-  addBreeds,
-  addGalleryImages,
   setLimit,
   setBreed,
   setOrder,
   setPage,
   setType,
-  setRandomCat,
   setSelectedBreed,
+  setSearchSubmited,
+  setSearchInput,
 } = catSlice.actions;
 
 export default catSlice.reducer;

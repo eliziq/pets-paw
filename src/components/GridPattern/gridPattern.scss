@@ -31,7 +31,7 @@
     border-radius: 20px;
     box-shadow: 0px 2px 20px -15px rgba(0, 0, 0, 0.4);
   }
-  
+
   span {
     display: none;
   }
@@ -63,7 +63,7 @@
       width: calc(100% - 20px);
       height: 34px;
     }
-    .breed-like {
+    .breed-toggle {
       bottom: 50%;
       left: 50%;
       transform: translate(-50%, 50%);
@@ -74,6 +74,33 @@
         height: 100%;
         width: auto;
         border-radius: 0;
+      }
+      &:hover {
+        background-color: $primary-pink;
+        // background-image: url(../../images/svgs/heart-white.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 10px;
+        img {
+          display: none;
+        }
+      }
+    }
+    .fav-hover {
+      &:hover {
+        background-image: url(../../images/svgs/heart-white.svg);
+      }
+    }
+    .like-hover {
+      &:hover {
+        background-image: url(../../images/svgs/smile-white.svg);
+        background-size: 20px;
+      }
+    }
+    .dislike-hover {
+      &:hover {
+        background-image: url(../../images/svgs/sad-white.svg);
+        background-size: 20px;
       }
     }
     .pink-filter {
@@ -114,11 +141,11 @@
   grid-row: 11/13;
 }
 
-.loading{
+.loading {
   position: absolute;
   align-self: center;
   justify-self: center;
-img{
-  height: 100px;
-}
+  img {
+    height: 100px;
+  }
 }

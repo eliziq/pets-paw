@@ -1,21 +1,14 @@
 import "./breedsFilter.scss";
 import sortUp from "../../images/svgs/sort-up.svg";
 import sortDown from "../../images/svgs/sort-down.svg";
-import select from "../../images/svgs/select-arrow.svg";
-import React, { useEffect } from "react";
+import React  from "react";
 import CustomSelector from "../CustomSelector/CustomSelector";
 import {
   fetchAsyncBreeds,
-  getAllBreeds,
   setLimit,
   setBreed,
   setOrder,
-  setPage,
-  getLimit,
-  getBreed,
   getOrder,
-  getPage,
-  fetchAsyncBreedList,
   getBreedList,
 } from "../../features/cats/catSlice";
 import { useDispatch } from "react-redux";
@@ -23,10 +16,6 @@ import { useSelector } from "react-redux";
 
 const BreedsFilter = () => {
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchAsyncBreedList());
-  // }, [dispatch]);
 
   const limitOptions = [
     { value: "5", label: "Limit: 5" },
@@ -78,12 +67,12 @@ const BreedsFilter = () => {
           className="limit"
         />
         <div
-          className={`sort ${order === 'desc' ? "sort-active" : ""}`}
+          className={`sort sort-up ${order === 'desc' ? "sort-active" : ""}`}
           onClick={descOrderHandler}
         >
           <img src={sortUp} alt="" />
         </div>
-        <div className="sort" onClick={ascOrderHandler}>
+        <div className="sort sort-down" onClick={ascOrderHandler}>
           <img src={sortDown} alt="" />
         </div>
       </div>

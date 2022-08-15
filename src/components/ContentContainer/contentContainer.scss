@@ -18,7 +18,7 @@
 
     .back-container {
       display: flex;
-      
+
       .page-name {
         margin-left: 10px;
         padding: 0px 30px;
@@ -40,6 +40,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        &:hover {
+          background-color: $primary-pink;
+          background-image: url(../../images/svgs/arrow-left-white.svg);
+          background-repeat: no-repeat;
+          background-position: center;
+          padding: 10px;
+          img {
+            display: none;
+          }
+        }
       }
     }
 

@@ -1,81 +1,60 @@
 import "./gridPattern.scss";
-import React, { useEffect, useRef} from "react";
+import React, { useRef } from "react";
 import {
   getAllBreeds,
   getLimit,
   getAllImages,
-  setSelectedBreed,
-  getBreedList,
-  fetchAsyncBreedList,
+  getSearchResult,
+  getFavourites,
+  getLikes,
+  getDislikes,
 } from "../../features/cats/catSlice";
 import { useSelector, useDispatch } from "react-redux";
-import like from "../../images/svgs/heart-outline.svg";
 import loading from "../../images/svgs/loading.svg";
 import { useLocation, Link } from "react-router-dom";
+import ImageItem from "../ImageItem/ImageItem";
 
-const GridPattern = () => {
-  const dispatch = useDispatch();
-  const pathname = useLocation().pathname;
-  const breeds = useSelector(getAllBreeds);
-  const gallery = useSelector(getAllImages);
+function GridPattern() {
+
+  const data = {
+    breeds:  useSelector(getAllBreeds),
+    gallery:  useSelector(getAllImages),
+    favourites:  useSelector(getFavourites),
+    likes:  useSelector(getLikes),
+    dislikes:  useSelector(getDislikes),
+    search: useSelector(getSearchResult)
+  }
+
   const limit = useSelector(getLimit);
+  //do i need this ref?
+  const containerRef = useRef(null);
 
-  const containerRef = useRef(null)
+  let renderSelected = "";
+  const url = useLocation().pathname.substring(1);
 
-  let renderBreeds = "";
-  let renderGallery = "";
+  renderSelected = (category) =>
+    category.length ? (
+      category.map((image) => {
+        if (category === data.breeds || category === data.search) {
+          return <ImageItem breed={image} key={image.id} />;
+        } else {
+          return <ImageItem image={image} key={image.id} />;
+        }
+      })
+    ) : (
+      <div className="loading">
+        <img src={loading} alt="" />
+      </div>
+    );
 
-  const aboutBreedHandler = (breed) => {
-    // dispatch(setSelectedBreed(breed));
-  };
 
-  renderBreeds = breeds.length ? (
-    breeds.map((breed) => {
-      return (
-        <div
-          className="grid-el"
-          key={breed.id}
-          data={breed}
-          onClick={() => aboutBreedHandler(breed)}
-        >
-          <Link to={`/breeds/${breed.id}`}>
-            <img src={breed.image?.url || breed.url} alt={breed.name} />
-            <div className="pink-filter"></div>
-            <span className="breed-name">{breed.name || "name"}</span>
-          </Link>
-        </div>
-      );
-    })
-  ) : (
-    <div className="loading">
-      <img src={loading} alt="" />
-    </div>
-  );
-
-  renderGallery = gallery.length ? (
-    gallery.map((image) => {
-      return (
-        <div className="grid-el" key={image.id} data={image}>
-          <img src={image.url} alt="" />
-          <div className="pink-filter"></div>
-          <span className="breed-like">
-            <img src={like} alt="" />
-          </span>
-        </div>
-      );
-    })
-  ) : (
-    <div className="loading">
-      <img src={loading} alt="" />
-    </div>
-  );
 
   return (
-    <div ref={containerRef} className={`grid grid-${limit}`}>
-      {(pathname === "/breeds" && renderBreeds) ||
-        (pathname === "/gallery" && renderGallery)}
+    //render from pathname
+    <div className={`grid grid-${limit}`}>
+      {renderSelected(data[url])}
     </div>
   );
-};
+}
 
 export default GridPattern;

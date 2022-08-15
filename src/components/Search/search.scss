@@ -10,11 +10,14 @@
   align-items: center;
   padding: 10px;
   flex: 3;
+  // position: relative;
+
   &:hover {
     // box-shadow: 0 0 0 2px $secondary-pink;
     border: 2px solid $secondary-pink;
   }
-  &:active, &:focus {
+  &:active,
+  &:focus {
     // box-shadow: 0 0 0 2px $secondary-pink;
     border: 2px solid $primary-pink;
   }
@@ -28,7 +31,8 @@
     color: $secondary-text-color;
     padding: 10px;
 
-    &:focus, &:active {
+    &:focus,
+    &:active {
       outline: none;
       color: black;
     }
@@ -38,8 +42,26 @@
     width: 40px;
     height: 40px;
     background: $secondary-pink;
+
     &:hover {
-      // background: $primary-pink;
+      background-color: $primary-pink;
+      background-image: url(../../images/svgs/search-white.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 10px;
+      img {
+        display: none;
+      }
     }
   }
+  // .click {
+  //   background: rgb(186, 213, 186);
+  //   opacity: 1;
+  //   position: absolute;
+  //   height: 40px;
+  //   width: 40px;
+  //   right: calc(0% + 10px);
+  //   top: 50%;
+  //   transform: translate(0%, -50%);
+  // }
 }

@@ -6,11 +6,10 @@
   flex: 1;
   margin-left: 10px;
 
-  .select-container{
+  .select-container {
     flex: 1;
   }
   .select {
-
     option {
       width: 300px;
       max-height: 300px;
@@ -37,12 +36,27 @@
       align-items: center;
       justify-content: center;
       margin-left: 10px;
-      &:hover{
-        border: 2px solid $secondary-pink;        
+      &:hover {
+        border: 2px solid $secondary-pink;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 10px;
+        img {
+          display: none;
+        }
       }
     }
-    .sort-active{
-
+    .sort-up {
+      &:hover {
+        background-image: url(../../images/svgs/sort-up-pink.svg);
+      }
+    }
+    .sort-down {
+      &:hover {
+        background-image: url(../../images/svgs/sort-down-pink.svg);
+      }
+    }
+    .sort-active {
     }
   }
 }
