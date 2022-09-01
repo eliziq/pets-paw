@@ -1,0 +1,124 @@
+@import "../../common/colors.scss";
+
+.overlay {
+  background-color: rgba($color: #000000, $alpha: 0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  .upload-modal {
+    background: $primary-color;
+    margin: 30px 30px 30px 0px;
+    position: absolute;
+    width: 50%;
+    left: calc(50% - 30px);
+    height: calc(100% - 60px);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    a {
+      color: $primary-pink;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    .cancel {
+      background-color: white;
+      height: 40px;
+      width: 40px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-self: end;
+      span {
+        position: relative;
+        height: 20px;
+        width: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        // transform: rotate(45deg);
+        &::before,
+        &::after {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 2px; /* cross thickness */
+          background: $primary-pink;
+          border-radius: 50%;
+        }
+        &::before {
+          transform: rotate(45deg);
+        }
+        &::after {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+    .upload-field-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+      padding-bottom: 50px;
+
+      .upload-btn {
+        height: 40px;
+        width: 172px;
+        font-style: normal;
+        font-size: 12px;
+        letter-spacing: 2px;
+        background-color: $primary-pink;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        align-self: center;
+      }
+      .upload-field {
+        background-color: white;
+        border-radius: 20px;
+        border: 2px dashed $secondary-pink;
+        height: 320px;
+        position: relative;
+        margin-bottom: 20px;
+
+        .uploaded-image-container {
+          width: 100%;
+          height: 100%;
+          padding: 20px 40px;
+          .img-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            border-radius: 10px;
+            z-index: 1;
+          }
+        }
+
+        img,
+        p {
+          left: 50%;
+          bottom: 50%;
+          transform: translate(-50%, 50%);
+          position: absolute;
+        }
+        p {
+          width: 100%;
+          margin: auto;
+          span {
+            font-weight: 500;
+          }
+          .clickable {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

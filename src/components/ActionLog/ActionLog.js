@@ -12,7 +12,11 @@ const ActionLog = ({ createdAt, imageId, value }) => {
       ? "added to dislikes"
       : value === 1
       ? "added to likes"
-      : "added to favourites";
+      : value === 2
+      ? "added to favourites"
+      : value === 12
+      ? "removed from favourites"
+      :'';
 
   return (
     <div className="action-log">

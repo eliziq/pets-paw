@@ -154,6 +154,17 @@ export const addFavouritePicture = createAsyncThunk(
   }
 );
 
+export const uploadImage = createAsyncThunk(
+  "cats/uploadImage",
+  async (payload) => {
+    await catsApi.post(`images/upload`, payload, {
+      headers: { "x-api-key": process.env.REACT_APP_CAT_API },
+      // body: { file: "", sub_id: "" },
+    });
+    return payload;
+  }
+);
+
 export const fetchActionLogFavourite = createAsyncThunk(
   "cats/fetchActionLogFavourite",
   async (_, { getState }) => {
@@ -161,11 +172,23 @@ export const fetchActionLogFavourite = createAsyncThunk(
       headers: { "x-api-key": process.env.REACT_APP_CAT_API },
     });
 
+    const favourites = getState().cats.favourites;
     const lastLog = response.data.pop();
-    lastLog["value"] = 2;
+    const isFav = !!favourites.find((el) => el.image_id === lastLog.image_id);
+    console.log(isFav);
+    lastLog["value"] = isFav ? 12 : 2;
+
+    // let isFav = false;
+    // for (let el of favourites) {
+    //   if (el.image_id === lastLog.image_id) {
+    //     isFav = true;
+    //     break;
+    //   }
+    // }
 
     const newActionLog = getState().cats.actionLog.slice();
     newActionLog.unshift(lastLog);
+    //image_id
 
     newActionLog.splice(4, 1);
     return newActionLog;
@@ -188,7 +211,7 @@ export const fetchAsyncVotes = createAsyncThunk(
     const response = await catsApi.get(`votes`, {
       headers: { "x-api-key": process.env.REACT_APP_CAT_API },
     });
-    console.log(response.data)
+    console.log(response.data);
     return response.data;
   }
 );
@@ -279,7 +302,7 @@ const catSlice = createSlice({
       payload.forEach((el) =>
         el.value === 1 ? likes.push(el) : dislikes.push(el)
       );
-      console.log(likes)
+      console.log(likes);
       return { ...state, likes: likes, dislikes: dislikes };
     },
     // [deleteFavourite.fulfilled]: (state, { payload }) => {

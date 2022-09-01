@@ -11,11 +11,13 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import Likes from "./pages/Likes/Likes";
 import Favourites from "./pages/Favourites/Favourites";
 import Dislikes from "./pages/Dislikes/Dislikes";
+import Upload from './pages/Upload/Upload'
 
 const App = () => {
 
   return (
     <div className="main-wrapper">
+      {/* <div className="overlay"></div> */}
       <Router>
         <Side />
         <Routes>
@@ -23,7 +25,8 @@ const App = () => {
           <Route path="/voting" element={<Voting />} />
           <Route path="/breeds" exact element={<Breeds />} />
           <Route path="/breeds/:id" element={<BreedPage />} />
-          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/gallery" exact element={<Gallery />} />
+          <Route path="/gallery/upload" element={<Upload/>} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/likes" element={<Likes />} />
           <Route path="/favourites" element={<Favourites />} />

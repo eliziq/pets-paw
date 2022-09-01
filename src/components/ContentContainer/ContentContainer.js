@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./contentContainer.scss";
 import back from "../../images/svgs/arrow-left.svg";
 import upload from "../../images/svgs/upload.svg";
 import BreedsFilter from "../BreedsFilter/BreedsFilter";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import {
   getSelectedBreed,
   fetchAsyncBreedList,
@@ -17,7 +17,13 @@ const ContentContainer = ({ title, children }) => {
   const { id } = useSelector(getSelectedBreed);
   const breeds = useSelector(getBreedList);
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const dispatch = useDispatch();
+
+  const openModalHandler = () => {
+    setIsOpen(true);
+  };
 
   useEffect(() => {
     if (!breeds.length) {
@@ -49,10 +55,12 @@ const ContentContainer = ({ title, children }) => {
         {pathname === "/breeds" && <BreedsFilter />}
 
         {pathname === "/gallery" && (
-          <button className="upload-btn">
-            <img src={upload} alt="" />
-            UPLOAD
-          </button>
+          <Link to="/gallery/upload">
+            <button className="upload-btn" onClick={openModalHandler}>
+              <img src={upload} alt="" />
+              UPLOAD
+            </button>
+          </Link> 
         )}
       </div>
       {children}
