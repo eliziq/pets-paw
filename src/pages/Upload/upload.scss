@@ -3,21 +3,21 @@
 .overlay {
   background-color: rgba($color: #000000, $alpha: 0.6);
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   left: 0;
+  overflow: auto;
   .upload-modal {
     background: $primary-color;
-    margin: 30px 30px 30px 0px;
-    position: absolute;
     width: 50%;
-    left: calc(50% - 30px);
-    height: calc(100% - 60px);
+    margin: 30px 30px 30px auto;
+    min-height: 90vh;
     padding: 20px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     text-align: center;
+    outline: none;
     a {
       color: $primary-pink;
     }
@@ -26,7 +26,7 @@
     }
     .cancel {
       background-color: white;
-      height: 40px;
+      min-height: 40px;
       width: 40px;
       border-radius: 10px;
       display: flex;
@@ -49,7 +49,7 @@
           width: 100%;
           height: 2px; /* cross thickness */
           background: $primary-pink;
-          border-radius: 50%;
+          border-radius: 1px;
         }
         &::before {
           transform: rotate(45deg);
@@ -62,16 +62,15 @@
     .upload-field-container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-evenly;
       flex: 1;
-      padding-bottom: 50px;
 
       .upload-btn {
         height: 40px;
         width: 172px;
         font-style: normal;
-        font-size: 12px;
-        letter-spacing: 2px;
+        font-size: 1.2rem;
+        letter-spacing: 0.2rem;
         background-color: $primary-pink;
         color: white;
         justify-content: center;
@@ -83,19 +82,20 @@
         background-color: white;
         border-radius: 20px;
         border: 2px dashed $secondary-pink;
-        height: 320px;
+        min-height: 320px;
+        // max-height: 320px;
         position: relative;
         margin-bottom: 20px;
+        flex: 0.6;
 
         .uploaded-image-container {
           width: 100%;
           height: 100%;
           padding: 20px 40px;
           .img-preview {
-            width: 100%;
-            height: 100%;
+            width: 85%;
+            height: 90%;
             object-fit: cover;
-            position: relative;
             border-radius: 10px;
             z-index: 1;
           }
@@ -107,6 +107,7 @@
           bottom: 50%;
           transform: translate(-50%, 50%);
           position: absolute;
+          font-size: 2rem;
         }
         p {
           width: 100%;

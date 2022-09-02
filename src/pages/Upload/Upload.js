@@ -79,10 +79,10 @@ const Upload = () => {
                 alt=""
                 className={file?.preview ? "img-preview" : ""}
               />
-              <p>
+              {!file.preview && <p>
                 <span>Drag here</span> your file or{" "}
                 <span className="clickable">Click here</span> to upload
-              </p>
+              </p>}
             </div>
           </div>
           <p>{fileName}</p>
